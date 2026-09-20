@@ -15,5 +15,4 @@ public class HelloController {
     public String test() {
         return "Isto é um teste.";
     }
-
 }
