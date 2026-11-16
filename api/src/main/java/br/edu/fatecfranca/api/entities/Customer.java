@@ -2,6 +2,7 @@ package br.edu.fatecfranca.api.entities;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 

@@ -7,30 +7,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name = "users")
 public class User {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false)
-  private String fullname;
+    @Column(nullable = false)
+    private String fullname;
 
-  @Column(nullable = false, unique = true)
-  private String username;
-  
-  @Column(nullable = false, unique = true)
-  private String email;
-  
-  @Column(nullable = false)
-  private String password;
-  
-  @Column(name = "is_admin", nullable = false)
-  private Boolean isAdmin = false;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-  public User() {
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(name = "is_admin", nullable = false)
+    private Boolean isAdmin;
+
+    public User() {
     }
 
     public Long getId() {
@@ -81,5 +81,4 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-  
 }
