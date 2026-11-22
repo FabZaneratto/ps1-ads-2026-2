@@ -11,11 +11,17 @@ import br.edu.fatecfranca.api.entities.Customer;
 import br.edu.fatecfranca.api.repositories.CarRepository;
 import br.edu.fatecfranca.api.repositories.CustomerRepository;
 
+import br.edu.fatecfranca.api.validators.ManufactureYearValidator;
+import br.edu.fatecfranca.api.validators.RequestValidator;
+import br.edu.fatecfranca.api.validators.SaleDataValidator;
+import br.edu.fatecfranca.api.validators.UniquePlatesValidator;
+
 @Service
 public class CarService {
 
   private final CarRepository repository;
   private final CustomerRepository customerRepository;
+  private final RequestValidator validator;
 
   private void copyToEntity(
       CarRequest request,
@@ -46,9 +52,20 @@ public class CarService {
       CustomerRepository customerRepository) {
       this.repository = repository;
       this.customerRepository = customerRepository;
+
+      RequestValidator platesValidator =
+          new UniquePlatesValidator(repository, null);
+
+      RequestValidator saleDataValidator =
+          new SaleDataValidator(platesValidator);
+
+      this.validator = new ManufactureYearValidator(saleDataValidator);
   }
 
   public Car create(CarRequest request) {
+
+      validator.validate(request, null);
+
       Car car = new Car();
 
       copyToEntity(request, car);
@@ -65,6 +82,9 @@ public class CarService {
   }
 
   public Car update(Long id, CarRequest request) {
+
+      validator.validate(request, id);
+
       Car car = new Car();
 
       copyToEntity(request, car);

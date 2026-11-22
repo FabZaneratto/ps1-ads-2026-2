@@ -66,7 +66,8 @@ public class CustomerService {
     }
 
     public Customer update(Long id, CustomerRequest request) {
-        validator.validate(request, null);
+
+        validator.validate(request, id);
 
         Customer customer = new Customer();
         copyToEntity(request, customer);
